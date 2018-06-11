@@ -16,13 +16,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include,re_path
 
 
 
 if settings.DEBUG:
     urlpatterns = [
         path ('admin/', admin.site.urls),
+        re_path (r'^index',include(("blog.urls","blogs"), namespace= "blogs")),
 
 
 
