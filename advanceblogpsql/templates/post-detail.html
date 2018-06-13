@@ -1,7 +1,14 @@
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 col-md-offset-4">
+        <h1>{{ details_list.title }} <small>{{ details_list.timestamp }}</small></h1>
+    <br>{{ details_list.description|linebreaks }}
+</div>
+</div>
+
+{% endblock %}
+
+
+{{ details_list.title }}

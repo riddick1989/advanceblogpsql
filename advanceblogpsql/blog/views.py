@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import render , Http404 ,get_object_or_404 ,HttpResponsePermanentRedirect,redirect
 from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView
@@ -13,11 +14,16 @@ def post_create(request):
             # '''Make a list of our post'''#
 '' '...................................................................'''
 def post_list(request):
-    item = Post.objects.all()
+    item = Post.objects.all()#.order_by("-timestamp")
+    paginator = Paginator(item,15)
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
+
     context = {
-        "object_list":item
+        "object_list":item,
+        "contacts":contacts
     }
-    template_name = "templates/base.html"
+    template_name = "templates/post-list.html"
     return render(request,template_name,context)
 
            #  '''Make single post_page '''   #
@@ -68,7 +74,7 @@ def post_update(requset,id):
 def post_delete(request,id):
     instance = get_object_or_404(Post,id=id)
     instance.delete()
-    return redirect("blogs:base")
+    return redirect("blogs:post-list")
 
 
 
