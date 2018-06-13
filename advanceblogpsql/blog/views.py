@@ -15,7 +15,7 @@ def post_create(request):
 '' '...................................................................'''
 def post_list(request):
     item = Post.objects.all()#.order_by("-timestamp")
-    paginator = Paginator(item,15)
+    paginator = Paginator(item,5)
     page = request.GET.get('page')
     contacts = paginator.get_page(page)
 

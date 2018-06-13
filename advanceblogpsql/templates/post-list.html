@@ -4,16 +4,20 @@
 <div class="container">
  <div class="row">
 {% for obj in object_list %}
-         <div class="col-md-12 col-md-offset-8">
-             <div class="col-md-8 col-md-offset-8">
+         <div class="col-md-12 col-md-offset-4">
+             <div class="col-md-6 col-md-offset-3">
             <div class="card-deck">
   <div class="card border-info mb-3">
-    <!--img class="card-img-top" src=".../100px180/" alt="Card image cap"-->
-    <div class="card-body">
-        <h5 class="card-title border-info mb-3"><a href="{{ obj.get_absolute_url }}">{{obj.title}}</a><small>{{obj.timestamp}}</small><br/></h5>
+        <div class="card-body">
+          <div class="card-header border-info mb-3 bg-success mb-3 "><h5><a href="{{ obj.get_absolute_url }}">{{obj.title}}</a><small>{{obj.timestamp}}</small><br/></h5>
+          </div>
+            <h5 class="card-title border-info mb-3"></h5>
+      {% if obj.image %}
+    <img src="{{obj.image.url}}" width="300" />
+      {% endif %}
       <p class="card-text"> {{ obj.description|linebreaks|truncatechars:100 }}</p>
-    </div>
-      <p><a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">view</a></p>
+          </div>
+      <p><a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button"> view </a></p>
     <div class="card-footer border-info mb-3 bg-success mb-3">
       <small class="text-muted">updated: {{obj.updated}}</small>
     </div>
